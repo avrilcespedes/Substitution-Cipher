@@ -1,0 +1,40 @@
+import random
+
+class Cipher:
+    def __init__(self):
+        self.alphabet = list('abcdefghijklmnopqrstuvwxyz')
+        self.key = []
+
+    def keyGen(self):
+        self.key = random.sample(self.alphabet, len(self.alphabet))
+
+    def clean_string(self, s):
+        s = ''.join(c for c in s if c.isalnum())
+        s = s.lower()
+        s = ''.join(s)
+        return s
+
+    def cipher(self, message):
+        cipher_dict = dict(zip(self.alphabet, self.key))
+        cipher_message = ''.join(cipher_dict.get(c, c) for c in message)
+        return cipher_message
+
+    def decipher(self, message):
+        decipher_dict = dict(zip(self.key, self.alphabet))
+        decipher_message = ''.join(decipher_dict.get(c, c) for c in message)
+        return decipher_message
+
+    def main(self):
+        self.keyGen()
+        message = input('Enter a message: ')
+        message = self.clean_string(message)
+        cipher_message = self.cipher(message)
+        print('Encrypted message:', cipher_message)
+        decipher_message = self.decipher(cipher_message)
+        print('Decrypted message:', decipher_message)
+
+# Run the cipher
+cipher = Cipher()
+cipher.main()
+if __name__ == '__main__':
+    main()
