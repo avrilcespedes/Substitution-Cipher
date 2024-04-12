@@ -1,0 +1,14 @@
+def fetch_file_data(encrypted_text):
+    with open(encrypted_text, 'r') as file:
+            encrypted_content = file.read()
+    return encrypted_content
+
+
+def analyze_frequency(encryptedContent):
+    frequencies = {}
+    for character in encryptedContent:
+        frequencies[character] = (encryptedContent.count(character)/len(encryptedContent))*100
+    return frequencies
+
+ciphered_text = fetch_file_data('cipherText.txt')
+potential_key = analyze_frequency(ciphered_text)
